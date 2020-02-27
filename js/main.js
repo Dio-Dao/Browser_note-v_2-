@@ -81,16 +81,16 @@ document.querySelector('.change_color').oninput = function () {
 	let theColor = this.value;
 	for (let i = 0; i < nt_mas.length; i++) {
 		if (nt_mas[i].className == 'note_title active') {
-			textarea_mas[i].style.backgroundColor = theColor;
-			nt_mas[i].style.backgroundColor = theColor;
-			nt_mas[i].style.borderBottomColor = theColor;
+			textarea_mas[i].style.borderColor = theColor;
+			// nt_mas[i].style.backgroundColor = theColor;
+			nt_mas[i].style.borderColor = theColor;
 		}
 	}
 	note_color_ls = [];
 	note_title_ls = [];
 	note_textarea_ls = [];
 	for (let i = 0; i < textarea_mas.length; i++) {
-		note_color_ls.push({ data: rgb2hex(nt_mas[i].style.backgroundColor) })
+		note_color_ls.push({ data: rgb2hex(nt_mas[i].style.borderColor) })
 		note_title_ls.push({ data: nt_mas[i].value });
 		note_textarea_ls.push({ data: textarea_mas[i].value });
 	}
@@ -135,7 +135,7 @@ document.querySelector('.note_inner').onkeyup = function () {
 	for (let i = 0; i < textarea_mas.length; i++) {
 		note_title_ls.push({ data: nt_mas[i].value });
 		note_textarea_ls.push({ data: textarea_mas[i].value })
-		note_color_ls.push({ data: rgb2hex(nt_mas[i].style.backgroundColor) })
+		note_color_ls.push({ data: rgb2hex(nt_mas[i].style.borderColor) })
 	}
 	for (let i = note_title_ls.length - 1; i < note_title_ls.length; i++) {
 		addToLocalStorage();
@@ -155,17 +155,17 @@ for (let i in note_title_ls) {
 		}
 	}
 }
-// for (let i in note_color_ls) {
-// 	if (note_color_ls[i]) {
-// 		for (let i = 0; i < textarea_mas.length; i++) {
-// 			textarea_mas[i].style.backgroundColor = note_color_ls[i].data;
-// 			nt_mas[i].style.backgroundColor = note_color_ls[i].data;
-// 			if (nt_mas[i].className == 'note_title active') {
-// 				nt_mas[i].style.borderBottomColor = note_color_ls[i].data;
-// 			}
-// 		}
-// 	}
-// }
+for (let i in note_color_ls) {
+	if (note_color_ls[i]) {
+		for (let i = 0; i < textarea_mas.length; i++) {
+			textarea_mas[i].style.borderColor = note_color_ls[i].data;
+			nt_mas[i].style.borderColor = note_color_ls[i].data;
+			if (nt_mas[i].className == 'note_title active') {
+				nt_mas[i].style.borderBottomColor = note_color_ls[i].data;
+			}
+		}
+	}
+}
 function addToLocalStorage() {
 	localStorage.setItem('note_tls', JSON.stringify(note_title_ls));
 	localStorage.setItem('note_txals', JSON.stringify(note_textarea_ls));
