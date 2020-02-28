@@ -36,7 +36,7 @@ addNote.onclick = function add_elements() {
 	insert_placeT.insertAdjacentHTML('beforeEnd', '<textarea class="note_textarea" \
 	placeholder="_ _ _      _ _ _      _ _ _\n_ _ _      _ _ _      _ _ _\n_ _ _      _ _ _      _ _ _\n_ _ _      _ _ _      _ _ _\n_ _ _      _ _ _      _ _ _" ></textarea>');
 	addColor.style.display = 'inline-block';
-	// pull_ribbon.style.display = 'block';
+	pull_word.style.display = 'block';
 
 	let header_width = document.querySelector(".note_header-right").offsetWidth + insert_placeH.offsetWidth + 5;
 	for (let i = 0; i < textarea_mas.length; i++) {
@@ -48,6 +48,7 @@ addNote.onclick = function add_elements() {
 }
 //-------------* Delete note tab
 let delNote = document.querySelector('.rem_note');
+let pull_word = document.querySelector('.pull_word');
 delNote.onclick = function () {
 	nt_mas;
 	textarea_mas;
@@ -65,7 +66,7 @@ delNote.onclick = function () {
 	else if (nt_mas.length == 4) {
 		nt_mas[nt_mas.length - 4].remove();
 		addColor.style.display = 'none';
-		// pull_ribbon.style.display = 'none';
+		pull_word.style.display = 'none';
 	}
 	else {
 		nt_mas[nt_mas.length - 4].remove();
@@ -117,7 +118,7 @@ for (let key in note_title_ls) {
 		insert_placeT.insertAdjacentHTML('beforeEnd', '<textarea class="note_textarea" \
 	placeholder="_ _ _      _ _ _      _ _ _\n_ _ _      _ _ _      _ _ _\n_ _ _      _ _ _      _ _ _\n_ _ _      _ _ _      _ _ _\n_ _ _      _ _ _      _ _ _" ></textarea>');
 		addColor.style.display = 'inline-block';
-		// pull_ribbon.style.display = 'block';
+		pull_word.style.display = 'block';
 
 		let header_width = document.querySelector(".note_header-right").offsetWidth + insert_placeH.offsetWidth + 5;
 		for (let i = 0; i < textarea_mas.length; i++) {
@@ -180,21 +181,21 @@ function rgb2hex(rgb) {
 		("0" + parseInt(rgb[3], 10).toString(16)).slice(-2) : '';
 }
 //-------------* Corner ribbon color
-// let body = document.querySelector('.body');
-// document.querySelector('.note_item').onmousemove = function () {
-// 	for (let i = 0; i < textarea_mas.length; i++) {
-// 		if (nt_mas[i].className == 'note_title active') {
-// 			if ((textarea_mas[i].offsetWidth > 1000) || (textarea_mas[i].offsetHeight > 590)) {
-// 				pull_ribbon.style.backgroundColor = '#F8463F';
-// 				pull_ribbon.style["boxShadow"] = "0 0 0 3px #F8463F";
-// 			}
-// 			else {
-// 				pull_ribbon.style.backgroundColor = '#57dd43';
-// 				pull_ribbon.style["boxShadow"] = "0 0 0 3px #57dd43";
-// 			}
-// 		}
-// 	}
-// }
+let body = document.querySelector('.body');
+document.querySelector('.note_inner').onmousemove = function () {
+	for (let i = 0; i < textarea_mas.length; i++) {
+		if (nt_mas[i].className == 'note_title active') {
+			if ((textarea_mas[i].offsetWidth > 1000) || (textarea_mas[i].offsetHeight > 590)) {
+				pull_ribbon.style.background = 'radial-gradient(circle at 50% 30%,rgb(211, 15, 15) 20%,rgb(151, 6, 6) 50%)';
+				pull_ribbon.style["boxShadow"] = "0 0 10px 6px rgba(255,0,0,0.5)";
+			}
+			else {
+				pull_ribbon.style.background = 'radial-gradient(circle at 50% 30%, rgb(0, 255, 42) 20%, rgb(12, 112, 2) 50%)';
+				pull_ribbon.style["boxShadow"] = "0 0 10px 6px rgba(6, 104, 11, 0.5)";
+			}
+		}
+	}
+}
 // -------------* Cursor Custom
 document.onmousemove = function () {
 	document.getElementsByTagName('body')[0].insertAdjacentHTML('beforeEnd', '<div id="cursor_custom"></div');
@@ -229,4 +230,9 @@ for (let i = 0; i < nt_mas.length; i++) {
 		cursor_custom.style.width = 10 + 'px';
 		cursor_custom.style.height = 10 + 'px';
 	}
+}
+
+let sw_btn = document.querySelector(".switch_btn");
+sw_btn.onclick = function () {
+	sw_btn.classList.toggle('switched');
 }
